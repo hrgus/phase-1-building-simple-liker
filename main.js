@@ -20,15 +20,22 @@ const FULL_HEART = '♥'
 // }
 
 function handleClick() {
-  errorModal = document.getElementsByClassName('#modal');
-  p = document.getElementById('#modal-message')
   mimicServerCall()
-  .then((data) => console.log(data))
+  .then(() => {
+    const hearts = Array.from(document.getElementsByClassName('like-glyph'));
+  //  hearts.forEach((heart) => heart.innerText = FULL_HEART)
+  for(heart of hearts){
+    console.log(heart)
+  }
+    })
   .catch((error) => {
-    errorModal.className = ' '
+    const errorModal = document.getElementById('modal');
+    errorModal.classList.remove('hidden');
+    p = document.getElementById('modal-message')
+    p.innerText = error
     setTimeout(() => {
       errorModal.className = 'hidden'
-      p.innerText = console.error();
+     
     }, 3000)
   })
 }
